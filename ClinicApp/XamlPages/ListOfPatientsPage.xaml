@@ -10,6 +10,7 @@
       Title="ListOfPatientsPage" Loaded="Page_Loaded" x:Name="page" Background="White">
     <Page.Resources>
         <local:EnumDescriptionConverter x:Key="EnumDescriptionConverter"/>
+        <local:AgeConverter x:Key="AgeConverter"/>
     </Page.Resources>
     <DockPanel LastChildFill="True" Background="White">
         <ToolBar x:Name="toolBar" DockPanel.Dock="Top" Background="White">
@@ -39,8 +40,15 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="iDColumn" Binding="{Binding Id}" Header="ID" Width="35"/>
                     <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Name}" Header="ФИО" Width="200"/>
-                    <DataGridTextColumn x:Name="nameAddress" Binding="{Binding Address}" Header="Адрес" Width="385"/>
+                    <DataGridTextColumn x:Name="nameAddress" Binding="{Binding Address}" Header="Адрес" Width="330"/>
                     <DataGridTextColumn x:Name="dateOfBirthColumn" Binding="{Binding DateOfBirth, StringFormat=dd.MM.yyyy}" Header="Дата рождения" Width="110"/>
+                    <DataGridTemplateColumn Header="Возраст" Width="60">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding DateOfBirth, Converter={StaticResource AgeConverter}}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTextColumn x:Name="phoneNumberColumn" Binding="{Binding PhoneNumber}" Header="Телефон" Width="125"/>
                     <DataGridTextColumn x:Name="genderColumn" Binding="{Binding Gender, Converter={StaticResource EnumDescriptionConverter}}" Header="Пол" Width="80"/>
                     <DataGridTemplateColumn Header="Редактировать">

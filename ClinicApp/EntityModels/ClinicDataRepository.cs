@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,13 +71,10 @@ namespace ClinicApp.EntityModels
         }
         public Boolean ModifyRequest(Request request)
         {
-            ClinicDbContext dbContext = new ClinicDbContext();
-            PatientCard card = request.Patient;
-            dbContext.Set(typeof(PatientCard)).Attach(card);
-            dbContext.Set(typeof(Request)).Attach(request);
-            dbContext.Entry(card).State = System.Data.Entity.EntityState.Modified;
-            dbContext.Entry(request).State = System.Data.Entity.EntityState.Modified;
-            return 0 < dbContext.SaveChanges();
+             ClinicDbContext dbContext = new ClinicDbContext();
+             dbContext.Set(typeof(Request)).Attach(request);
+             dbContext.Entry(request).State = System.Data.Entity.EntityState.Modified;
+             return 0 < dbContext.SaveChanges();
         }
         public Boolean DeleteCard(Int32 id)
         {

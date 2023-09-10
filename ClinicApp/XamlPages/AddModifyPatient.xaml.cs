@@ -73,6 +73,11 @@ namespace ClinicApp.XamlPages
                     status = false;
                     messageBuilder.Append("Дата рождения - обязательное поле для ввода.\n");
                 }
+                if (dateOfBirth > DateTime.Now) 
+                {
+                    status = false;
+                    messageBuilder.Append("Дата рождения должна быть в прошлом или настоящем времени.\n");
+                }
                 #endregion
                 #region Checking entered address
                 if (String.IsNullOrEmpty(address))
